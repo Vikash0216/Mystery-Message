@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "userName": "vikash_01",
+    "textMessage": "Hey! Just checking in. How are you?",
+    "time": "2025-07-19T10:15:00Z"
+  },
+  {
+    "id": "2",
+    "userName": "anita_23",
+    "textMessage": "Meeting postponed to 3 PM.",
+    "time": "2025-07-19T08:30:00Z"
+  },
+  {
+    "id": "3",
+    "userName": "raj_dev",
+    "textMessage": "Your code review looks great. Just a few comments.",
+    "time": "2025-07-18T16:45:00Z"
+  },
+  {
+    "id": "4",
+    "userName": "neha.codes",
+    "textMessage": "Loved your recent blog post on TypeScript!",
+    "time": "2025-07-17T12:00:00Z"
+  },
+  {
+    "id": "5",
+    "userName": "amit2025",
+    "textMessage": "Can we connect on a quick call later today?",
+    "time": "2025-07-19T06:50:00Z"
+  }
+]
