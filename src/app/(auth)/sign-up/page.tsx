@@ -27,7 +27,7 @@ import { Button } from "@/components/ui/button";
 
 
 
-export default function page() {
+export default function Page() {
   const [userName, setUserName] = useState("");
   const [isCheckingUserName, setIsCheckingUserName] = useState(false);
   const [userNameMessage, setUserNameMessage] = useState("");
