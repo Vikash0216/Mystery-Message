@@ -10,7 +10,6 @@ import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
 import { Loader2, RefreshCcw } from "lucide-react";
-import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -28,7 +27,7 @@ function Page() {
     setMessages(messages.filter((message) => message._id !== messageId));
   };
 
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const form = useForm<z.infer<typeof acceptMessageSchema>>({
     resolver: zodResolver(acceptMessageSchema),

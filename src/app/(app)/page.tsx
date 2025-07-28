@@ -10,9 +10,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -26,22 +24,21 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import Autoplay, { AutoplayType } from "embla-carousel-autoplay";
 
 export default function Home() {
-  const [showDialogBox , setShowDialogBox] = useState(false)
+  const [showDialogBox, setShowDialogBox] = useState(false);
   const { data: session } = useSession();
-  const pluginRef = useRef<any>(null);
-
+  const pluginRef = useRef<AutoplayType | null>(null);
 
   useEffect(() => {
     if (!session || !session.user) {
-     const timer =  setTimeout(()=>{
-        setShowDialogBox(true)
-      },10000)
-      return ()=> clearTimeout(timer)
+      const timer = setTimeout(() => {
+        setShowDialogBox(true);
+      }, 10000);
+      return () => clearTimeout(timer);
     }
   }, []);
   const [pluginReady, setPluginReady] = useState(false);
@@ -64,26 +61,26 @@ export default function Home() {
       <AlertDialog open={showDialogBox} onOpenChange={setShowDialogBox}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Has'nt Sign-up yet</AlertDialogTitle>
+            <AlertDialogTitle>
+              <p>Hasn&#39;t signed up yet</p>
+            </AlertDialogTitle>
             <AlertDialogDescription>
-            Sign in an get into this awesome world
+              Sign in an get into this awesome world
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction>
-              <Link href={'/sign-up'}>
-              Sign-up Now
-              </Link>
+              <Link href={"/sign-up"}>Sign-up Now</Link>
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
 
       <Carousel
-        plugins={[pluginRef.current]}
-        onMouseEnter={pluginRef.current.stop}
-        onMouseLeave={pluginRef.current.reset}
+        plugins={pluginRef.current ? [pluginRef.current] : []}
+        onMouseEnter={() => pluginRef.current?.stop?.()}
+        onMouseLeave={() => pluginRef.current?.reset?.()}
         className="w-full max-w-xs"
       >
         <CarouselContent>
