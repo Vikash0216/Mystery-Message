@@ -4,8 +4,7 @@ import {
   CardContent,
   CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
+  CardHeader
 } from "@/components/ui/card";
 import {
   AlertDialog,
@@ -22,7 +21,7 @@ import { Button } from "./ui/button";
 import { X } from "lucide-react";
 import { Message } from "@/models/User.model";
 import { toast } from "sonner";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { ApiResponse } from "@/types/ApiResponse";
 
 type MessageCardProps = {
@@ -40,13 +39,17 @@ function MessageCard({ message, onMessageDelete }: MessageCardProps) {
         description: response.data.message,
       });
       onMessageDelete(message._id);
-    } catch (error:any) {
-      const message = error?.response?.data.message || "Failed to delete message"
-      toast.error("Error",{
-        description:message
-      })
-    }
-  };
+    } catch (error) {
+       let errorMessage = "Failed to delete message";
+
+      if (axios.isAxiosError(error) && error.response) {
+        errorMessage = error.response.data?.message || errorMessage;
+      }
+
+      toast.error("Error", {
+        description: errorMessage,
+      });
+};
 
   return (
     <Card className="relative bg-white shadow-md rounded-2xl border border-gray-200 p-4 transition hover:shadow-lg">
