@@ -4,6 +4,7 @@ import UserModel from "@/models/User.model";
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({

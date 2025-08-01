@@ -10,9 +10,9 @@ export async function middleware(request: NextRequest) {
   );
 
   // ✅ Redirect logged-in users away from auth pages
-  // if (token && isAuthPage) {
-  //   return NextResponse.redirect(new URL("/dashboard", request.url));
-  // }
+  if (token && isAuthPage) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
 
   // 🚫 Dashboard protection is disabled for now
   // Uncomment below to protect /dashboard

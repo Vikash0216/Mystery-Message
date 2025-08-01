@@ -4,6 +4,7 @@ import { authOptions } from "../auth/[...nextauth]/options";
 import dbConnect from "@/lib/dbConnect";
 import { User } from "next-auth";
 
+type ExtendedUser = User & { _id: string };
 
 
 export async function POST(request: Request) {
@@ -26,7 +27,7 @@ export async function POST(request: Request) {
     }
    
   
-    const user: User = session?.user as User;
+    const user = session.user as ExtendedUser;
     const updatedUser = await UserModel.findByIdAndUpdate(
       user._id,
       {
@@ -59,7 +60,7 @@ export async function POST(request: Request) {
         }
     )
   } catch (error) {
-    console.log("Failed to update the user acceptingmessages");
+    console.log("Failed to update the user acceptingmessages",error);
       return Response.json(
         {
           success: false,
@@ -72,7 +73,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   await dbConnect();
 
   try {
@@ -86,7 +87,9 @@ export async function GET(request: Request) {
       });
     }
 
-    const userFound = await UserModel.findById((session.user as any)._id);
+   const user = session.user as ExtendedUser;
+
+  const userFound = await UserModel.findById(user._id)
 
     if (!userFound) {
       return Response.json({
