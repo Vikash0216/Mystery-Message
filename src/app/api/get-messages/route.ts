@@ -4,7 +4,7 @@ import { getServerSession, User } from "next-auth";
 import dbConnect from "@/lib/dbConnect";
 import mongoose from "mongoose";
 
-export async function GET(request: Request) {
+export async function GET() {
   await dbConnect();
   const session = await getServerSession(authOptions);
   if (!session || !session.user) {
@@ -71,7 +71,7 @@ export async function GET(request: Request) {
     return Response.json(
       {
         success: false,
-        message: "Unable to get messages",
+        message: "Unable to get messages",error
       },
       {
         status: 500,
