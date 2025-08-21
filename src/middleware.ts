@@ -9,10 +9,10 @@ export async function middleware(request: NextRequest) {
     url.pathname.startsWith(path)
   );
 
-  // ✅ Redirect logged-in users away from auth pages
-  if (token && isAuthPage) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
+  // // ✅ Redirect logged-in users away from auth pages
+  // if (token && isAuthPage) {
+  //   return NextResponse.redirect(new URL("/dashboard", request.url));
+  // }
 
   // 🚫 Dashboard protection is disabled for now
   // Uncomment below to protect /dashboard
